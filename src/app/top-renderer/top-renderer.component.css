@@ -1,0 +1,10 @@
+#containerX {
+    width: 200px;
+    height: 200px;
+    background-color: transparent; /* or transparent; will show through only if renderer alpha: true */
+    border: none;
+    top: 20px;
+    right : 200px;
+    margin: 0;
+    padding: 0px;
+}

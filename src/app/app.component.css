@@ -3,17 +3,20 @@
 }
 
 .sliders {
-  height: 25%;
+  height: 40%;
 }
 
 .top {
-  height: 25%;
+  height: 20%;
 }
 
 .middle {
-  height: 25%;
+  height: 20%;
 }
 
 .bottom {
-  height: 25%;
+  height: 20%;
+}
+.right-side{
+  height: 45em;
 }

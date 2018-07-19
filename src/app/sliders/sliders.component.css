@@ -1,0 +1,98 @@
+.slider1 {
+    -webkit-appearance: none;
+   appearance: none;
+   width: 75%; 
+   height: 11px; 
+   background: rgb(255, 0, 0); 
+   outline: none; 
+   opacity: 0.7; 
+   -webkit-transition: .2s;
+   transition: opacity .2s;
+}
+
+.slider2 {
+   -webkit-appearance: none;  
+  appearance: none;
+  width: 75%; 
+  height: 11px; 
+  background: rgb(0, 255, 0); 
+  outline: none; 
+  opacity: 0.7; 
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider3 {
+   -webkit-appearance: none;  
+  appearance: none;
+  width: 75%; 
+  height: 11px; 
+  background: rgb(0, 0, 255); 
+  outline: none; 
+  opacity: 0.7; 
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider1::-webkit-slider-thumb {
+   -webkit-appearance: none; /*Override default look*/
+   width: 12px; /* Set a specific slider handle width */
+   height: 15px; /* Slider handle height */
+   border-radius: 100%;
+   background: rgb(121, 121, 121); 
+   cursor: pointer; /* Cursor on hover */
+}
+
+.slider2::-webkit-slider-thumb {
+   -webkit-appearance: none; /*Override default look*/
+   width: 12px; /* Set a specific slider handle width */
+   height: 15px; /* Slider handle height */
+   border-radius: 100%;
+   background: rgb(121, 121, 121); 
+   cursor: pointer; /* Cursor on hover */
+}
+
+.slider3::-webkit-slider-thumb {
+   -webkit-appearance: none; /*Override default look*/
+   width: 12px; /* Set a specific slider handle width */
+   height: 15px; /* Slider handle height */
+   border-radius: 100%;
+   background: rgb(121, 121, 121); 
+   cursor: pointer; /* Cursor on hover */
+}
+
+/* Mouse-over effects */
+.slider1:hover {
+   opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider2:hover {
+   opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slider3:hover {
+   opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slidecontainerX {
+   margin-top:1em; 
+   width: 4in;
+   margin-left: 15px; 
+}
+.slidecontainerY {
+   margin-top:1em; 
+   width: 4in; 
+   margin-left: 15px; 
+}
+.slidecontainerZ {
+   margin-top:1em; 
+   width: 4in; 
+   margin-left: 15px; 
+}
+
+.volumeChange {
+   margin-top:1em; 
+   width: 5in; 
+   margin-left: 15px; 
+}

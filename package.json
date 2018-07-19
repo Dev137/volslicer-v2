@@ -25,7 +25,9 @@
     "zone.js": "^0.8.26",
     "bootstrap": "^4.1.1",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.3"
+    "popper.js": "^1.14.3",
+    "three": "0.94.0",
+    "@types/three": "0.92.12"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^6.0.3",

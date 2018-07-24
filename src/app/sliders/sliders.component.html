@@ -1,29 +1,25 @@
-<html>
-  <body>
-    <div class="slidecontainerX">
-      <input type="range" min="0" max="256" value="128" class="slider1" id="indexX" oninput='functionX()'> <output> 100 <span id="demoX"></span></output>
-    </div>
-    <div class="slidecontainerY">
-      <input type="range" min="0" max="42" value="21" class="slider2" id="indexY" oninput='functionY()'> <output> 100 <span id="demoY"></span></output>
-    </div>
-    <div class="slidecontainerZ"> 
-      <input type="range" min="0" max="256" value="128" class="slider3" id="indexZ" oninput='functionZ()'> <output> 100 <span id="demoZ"></span></output>
-    </div> 
-    <div class ="volumeChange">
-      <form>
-        Lower Threshold:
-        <input type="number" name="lowerThreshold" value=18850 oninput=""><br>
-
-        Upper Threshold:
-        <input type="number" name="upperThreshold" value=25337 oninput=""><br>
-
-        Window Low:
-        <input type="number" name="windowLow" value=18850 oninput=""><br>
-
-        Window High:  
-        <input type="number" name="windowHigh" value=25337 oninput=""><br>
-        <input type="reset">
-      </form>
-    </div> 
-  </body>
-</html>
+<div>
+  <form>
+    Lower Threshold:
+    <input type="number" name="lowerThreshold" max="9999999" maxlength="7" value=18850 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"><br>
+    Upper Threshold:
+    <input type="number" name="upperThreshold" max="9999999" maxlength="7" value=25337 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"><br>
+    Window Low:
+    <input type="number" name="windowLow" max="9999999" maxlength="7" value=18850 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"><br>
+    Window High:
+    <input type="number" name="windowHigh" max="9999999" maxlength="7" value=25337 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"><br>
+    <input type="reset" value="Reset Values">
+  </form>
+</div> 
+<div class="slidecontainer">   
+  <output style="color: black;"> Index X  Value: <span id="demoX"></span></output>
+  <input type="range" id="indexX"  class="Slider" oninput='functionX()'>
+</div>
+<div class="slidecontainer">
+  <output style="color:black;"> Index Y  Value: <span id="demoY"></span></output>
+  <input type="range" id="indexY" class="Slider1" oninput='functionY()'>
+</div>
+<div class="slidecontainer">
+  <output style="color:black;">Index Z  Value: <span id="demoZ"></span></output>
+  <input type="range" id="indexZ" class="Slider2" oninput='functionZ()'>
+</div>

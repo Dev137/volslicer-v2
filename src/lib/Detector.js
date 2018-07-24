@@ -1,18 +1,16 @@
-
-
 /**
  * @author alteredq / http://alteredqualia.com/
  * @author mr.doob / http://mrdoob.com/
  */
 
-var Detector = {
+let Detector = {
 
 	canvas: !! window.CanvasRenderingContext2D,
 	webgl: ( function () {
 
 		try {
 
-			var canvas = document.createElement( 'canvas' ); return !! ( window.WebGLRenderingContext && ( canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) ) );
+			let canvas = document.createElement( 'canvas' ); return !! ( window.WebGLRenderingContext && ( canvas.getContext( 'webgl' ) || canvas.getContext( 'experimental-webgl' ) ) );
 
 		} catch ( e ) {
 
@@ -26,7 +24,7 @@ var Detector = {
 
 	getWebGLErrorMessage: function () {
 
-		var element = document.createElement( 'div' );
+		let element = document.createElement( 'div' );
 		element.id = 'webgl-error-message';
 		element.style.fontFamily = 'monospace';
 		element.style.fontSize = '13px';
@@ -56,7 +54,7 @@ var Detector = {
 
 	addGetWebGLMessage: function ( parameters ) {
 
-		var parent, id, element;
+		let parent, id, element;
 
 		parameters = parameters || {};
 
@@ -77,8 +75,4 @@ if ( typeof module === 'object' ) {
 
 	module.exports = Detector;
 
-}
-
-export {
-	Detector
 }

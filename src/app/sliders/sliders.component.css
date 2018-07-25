@@ -3,7 +3,6 @@ input[type=range] {
 margin: 5px;
 width:75%;
 background-color: transparent;
-
 }
 input[type=range]:focus {
 outline: none;
@@ -121,8 +120,9 @@ cursor: pointer;
 margin-top: 0px;
 }
 input[type=range]:hover {
-opacity: 1;
+opacity: 1;    
 }
+
 input[type=number]{
     width: 75px;
     border: none;
@@ -132,6 +132,6 @@ input[type=number]{
 }
 input[type=reset]{
     height: 20px;
-    font-size: 12px;
+    font-size: 12px;    
     width: 100px;
 }

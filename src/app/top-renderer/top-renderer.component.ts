@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as THREE from 'three';
-import * as MRCLoader from '../../lib/loaders/MRCLoader';
+import { MRCDataLoader} from '../../lib/loaders/MRCLoader';
 
 @Component({
   selector: 'app-top-renderer',
@@ -16,14 +16,16 @@ export class TopRendererComponent implements OnInit {
   private windowHeight;
   private containerX;
   private sceneX;
-
+  private sliceX;
   private twoHeight = 200;
   private twoWidth = 200;
   private view;
-  public views;
+  private views;
 
   constructor() {
+  }
 
+  ngOnInit() {
     this.views = [
       {
         left: 0.6,
@@ -40,44 +42,56 @@ export class TopRendererComponent implements OnInit {
         }
       }
     ];
-  }
 
-  ngOnInit() {
+
     this.dirLight = new THREE.DirectionalLight(0xffffff);
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
-    // this.init();
-    // this.animate();
+    this.init();
+    this.animate();
   }
 
   init() {
-
-    // this.view = this.views[0];
-    // this.camera3 = new THREE.PerspectiveCamera(this.view.fov, this.twoWidth / this.twoHeight, 0.01, 10000);
+  
+    
+    this.view = this.views[0];
+    this.camera3 = new THREE.PerspectiveCamera(this.view.fov, this.twoWidth / this.twoHeight, 0.01, 10000);
     // this.camera3.position = [this.view.eye[0] + 128, this.view.eye[1], this.view.eye[2]];
-    // this.camera3.up = [this.view.up[0], this.view.up[1], this.view.up[2]];
+    this.camera3.position.x = this.view.eye[0]+128;
+    this.camera3.position.y = this.view.eye[1];
+    this.camera3.position.z = this.view.eye[2];
+    //this.camera3.up = [this.view.up[0], this.view.up[1], this.view.up[2]];
+    this.camera3.up.x = this.view.up[0];
+    this.camera3.up.y = this.view.up[1];
+    this.camera3.up.z = this.view.up[2];
 
-    // this.sceneX = new THREE.Scene();
+    this.sceneX = new THREE.Scene();
 
-    // this.dirLight.position.set(200, 200, 1000).normalize();
-    // this.sceneX.add(this.dirLight);
-    // const manager = new THREE.LoadingManager();
-    // const loader = new MRCLoader(manager);
+    this.dirLight.position.set(200, 200, 1000).normalize();
+    this.sceneX.add(this.dirLight);
+    const manager = new THREE.LoadingManager();
+    const loader = new MRCDataLoader(manager);
 
-    // console.log('Manager is ready');
+    console.log('Manager is ready');
 
-    // loader.load('models/mrc/bin8Data/avebin8.mrc', function (volume) {
-    //   const geometry = new THREE.BoxGeometry(volume.xLength, volume.yLength, volume.zLength);
-    //   const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
-    //   const cubeX = new THREE.Mesh(geometry, material);
-    //   cubeX.visible = false;
-    //   this.sceneX.add(this.cubeX);
-    // });
+    loader.load('models/mrc/bin8Data/avebin8.mrc', function (volume) {
+      const geometry = new THREE.BoxGeometry(volume.xLength, volume.yLength, volume.zLength);
+      const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+      const cubeX = new THREE.Mesh(geometry, material);
+      cubeX.visible = false;
+      const boxX = new THREE.BoxHelper(cubeX);
+      this.sceneX.add(this.cubeX);
+      
+      // this.sliceX = volume.extractSlice('x', Math.floor(volume.RASDimensions[0] / 2));
+      // this.sliceXCopy = volume.extractSlice('x', Math.floor(volume.RASDimensions[0]/2));
+      // this.sceneX.add(this.sliceX.mesh);
+      // console.log(this.sliceX);
+    });
 
-    // this.renderer3 = new THREE.WebGLRenderer({alpha: true});
-    // this.containerX = document.createElement('containerX');
-    // document.body.appendChild(this.containerX);
-    // this.containerX.appendChild(this.renderer3.domElement);
+    this.renderer3 = new THREE.WebGLRenderer({alpha: true});
+    this.containerX = document.createElement('containerX');
+    document.body.appendChild(this.containerX);
+    this.containerX.appendChild(this.renderer3.domElement);
 
   }
 

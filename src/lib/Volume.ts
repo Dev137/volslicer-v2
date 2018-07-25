@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { createError } from '@angular/core/src/render3/instructions';
+// import { createError } from '@angular/core/src/render3/instructions';
 import { VolumeSlice } from './VolumeSlice';
 
 /**
@@ -24,14 +24,14 @@ export class Volume {
   public data;
   public spacing;
   public offset;
-  public matrix: THREE.Matrix3;
+  public matrix;
   public inverseMatrix: THREE.Matrix4;
   private sliceList: any[];
   public min;
   public max;
   public RASDimensions;
 
-  constructor(xLength, yLength, zLength, type, arrayBuffer) {
+  constructor(xLength?, yLength?, zLength?, type?, arrayBuffer?) {
 
     if (arguments.length > 0) {
       /**
@@ -108,7 +108,7 @@ export class Volume {
         case 'unsigned long long int' :
         case 'uint64' :
         case 'uint64_t' :
-          createError('Error in THREE.Volume constructor : this type is not supported in JavaScript', Error);
+          // createError('Error in THREE.Volume constructor : this type is not supported in JavaScript', Error);
           break;
         case 'Float32' :
         case 'float32' :
@@ -126,7 +126,7 @@ export class Volume {
       }
 
       if (this.data.length !== this.xLength * this.yLength * this.zLength) {
-        createError('Error in THREE.Volume constructor, lengths are not matching arrayBuffer size', Error);
+        // createError('Error in THREE.Volume constructor, lengths are not matching arrayBuffer size', Error);
       }
     }
 

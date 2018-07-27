@@ -7,23 +7,26 @@ export class MRCDataLoader {
 
   constructor(manager) {
     this.manager = (manager !== undefined) ? manager : THREE.DefaultLoadingManager;
-    Object.assign(this, THREE.EventDispatcher.prototype);
+    let myLoader = new THREE.EventDispatcher();
+    Object.assign(this, myLoader);
   }
 
-  public load(url, onLoad?, onProgress?, onError?) {
+ load(url, onLoad?, onProgress?, onError?) {
+
+  console.log(url);
     const scope = this;
 
     const loader = new THREE.FileLoader(scope.manager);
     loader.setResponseType('arraybuffer');
     loader.load(url, function (data) {
 
-      onLoad(this.parse(data));
+      onLoad(parse(data));
 
     }, onProgress, onError);
 
-  }
+  
 
-  public parse(data) {
+ function parse(data) {
 
     let _data = data;
     let _dataPointer = 0;
@@ -32,61 +35,63 @@ export class MRCDataLoader {
 
     function parseStream(_data) {
 
-      const MRC = {
-        nx: 0, // Number of Columns
-        ny: 0, // Number of Rows
-        nz: 0, // Number of Sections
-        mode: 0, // Type of pixel in image. Values used by IMOD
-        nxstart: 0, // Startin poin to sub image (not used in IMOD)
-        nystart: 0,
-        nzstart: 0,
-        mx: 0, // Grid size in X, Y, Z
-        my: 0,
-        mz: 0,
-        xlen: 0, // Cell size; pixel spacing = xlen/mx...
-        ylen: 0,
-        zlen: 0,
-        alpha: 0, // cell angles - ignored by IMOD
-        beta: 0,
-        gamma: 0,
-        mapc: 0, // map column
-        mapr: 0, // map row
-        maps: 0, // map section
-        amin: 0, // Minimum pixel value
-        amax: 0, // Maximum pixel value
-        amean: 0, // mean pixel value
-        ispeg: 0, // space group numbe (ignored by IMOD0
-        next: 0, // number of bytes in extended header
-        creatid: 0, // is 0
-        extra: null,
-        nint: 0, //  number of intergers or bytes per section
-        nreal: 0, //  Number of reals per section
-        imodStamp: 0, // 1146047817 = file created by IMOD
-        imodFlags: 0, // Bit flags
-        idtype: 0,
-        lens: 0,
-        nd1: 0,
-        lables: 0,
-        nd2: 0,
-        vd1: 0,
-        vd2: 0,
-        tiltangles: null,
-        xorg: 0, // Orgin of the image
-        yorg: 0,
-        zorg: 0,
-        cmap: 0, // Contains "MAP "
-        stamp: 0, // Frist two bytes = 17 17 for bin-endian or 68 and 65 for littl-edian
-        rms: 0, // RMS deviation of densitites from mean density
-        nlabl: 0, // number of lables with useful data
-        data: null, // 10 lables of 80 characters
-        min: Infinity,
-        max: -Infinity,
-        mean: 0,
-        space: null,
-        spaceorientation: null,
-        rasspaceorientation: null,
-        orientation: null,
-        normcosine: null
+      console.log(_data);
+
+      let MRC:any = {
+        // nx: 0, // Number of Columns
+        // ny: 0, // Number of Rows
+        // nz: 0, // Number of Sections
+        // mode: 0, // Type of pixel in image. Values used by IMOD
+        // nxstart: 0, // Startin poin to sub image (not used in IMOD)
+        // nystart: 0,
+        // nzstart: 0,
+        // mx: 0, // Grid size in X, Y, Z
+        // my: 0,
+        // mz: 0,
+        // xlen: 0, // Cell size; pixel spacing = xlen/mx...
+        // ylen: 0,
+        // zlen: 0,
+        // alpha: 0, // cell angles - ignored by IMOD
+        // beta: 0,
+        // gamma: 0,
+        // mapc: 0, // map column
+        // mapr: 0, // map row
+        // maps: 0, // map section
+        // amin: 0, // Minimum pixel value
+        // amax: 0, // Maximum pixel value
+        // amean: 0, // mean pixel value
+        // ispeg: 0, // space group numbe (ignored by IMOD0
+        // next: 0, // number of bytes in extended header
+        // creatid: 0, // is 0
+        // extra: null,
+        // nint: 0, //  number of intergers or bytes per section
+        // nreal: 0, //  Number of reals per section
+        // imodStamp: 0, // 1146047817 = file created by IMOD
+        // imodFlags: 0, // Bit flags
+        // idtype: 0,
+        // lens: 0,
+        // nd1: 0,
+        // lables: 0,
+        // nd2: 0,
+        // vd1: 0,
+        // vd2: 0,
+        // tiltangles: null,
+        // xorg: 0, // Orgin of the image
+        // yorg: 0,
+        // zorg: 0,
+        // cmap: 0, // Contains "MAP "
+        // stamp: 0, // Frist two bytes = 17 17 for bin-endian or 68 and 65 for littl-edian
+        // rms: 0, // RMS deviation of densitites from mean density
+        // nlabl: 0, // number of lables with useful data
+        // data: null, // 10 lables of 80 characters
+        // min: Infinity,
+        // max: -Infinity,
+        // mean: 0,
+        // space: null,
+        // spaceorientation: null,
+        // rasspaceorientation: null,
+        // orientation: null,
+        // normcosine: null
       };
 
       _dataPointer = 0;
@@ -116,6 +121,7 @@ export class MRCDataLoader {
       console.log('ylen = ' + MRC.ylen);
       MRC.zlen = scan('float');
       console.log('zlen = ' + MRC.zlen);
+
       MRC.alpha = scan('float');
       MRC.beta = scan('float');
       MRC.gamma = scan('float');
@@ -252,9 +258,10 @@ export class MRCDataLoader {
         chunks = 1;
 
       }
+      console.log(type);
 
       let _chunkSize = 1;
-      let _array_type: any;
+      let _array_type;
 
       switch (type) {
 
@@ -264,7 +271,11 @@ export class MRCDataLoader {
         case 'schar':
           _array_type = Int8Array;
           break;
-        //  2 byte data types
+        //  2 byte data 
+        case 'short':
+        _array_type = Uint16Array;
+        _chunkSize = 2;
+        break;
         case 'ushort':
           _array_type = Uint16Array;
           _chunkSize = 2;
@@ -280,7 +291,7 @@ export class MRCDataLoader {
           break;
         case 'sint':
           _array_type = Int32Array;
-          _chunkSize = 4;
+         _chunkSize = 4;
           break;
         case 'float':
           _array_type = Float32Array;
@@ -303,17 +314,21 @@ export class MRCDataLoader {
       console.log(_start + ',' + _end);
 
       const _data_slice = _data.slice(_start, _end);
+      console.log(_data_slice);
       let voxels = new _array_type(_data_slice);
 
       if (_nativeLittleEndian !== _littleEndian) {
         voxels = flipEndianness(voxels, _chunkSize);
       }
 
+      console.log(chunks, voxels);
+
       if (chunks === 1) {
-        return Number(voxels[0]);
+        console.log('yes');
+        return voxels[0];
       }
 
-      return Number(voxels);
+      return voxels;
     }
 
     // Swapping the bits to match the endianness
@@ -333,6 +348,14 @@ export class MRCDataLoader {
       }
       return array;
     }
+
+
+
+
+
+
+
+
 
     const MRC = parseStream(data);
 
@@ -410,6 +433,7 @@ export class MRCDataLoader {
     return volume;
 
   } // end of parse
+}
 
 }
 

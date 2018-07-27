@@ -11,7 +11,7 @@ export class TopRendererComponent implements OnInit {
 
   private renderer3;
   private camera3;
-  private dirLight = new THREE.DirectionalLight(0xffffff);
+  private dirLight;
   private windowWidth;
   private windowHeight;
   private containerX;
@@ -74,7 +74,7 @@ export class TopRendererComponent implements OnInit {
 
     console.log('Manager is ready');
 
-    loader.load('models/mrc/bin8Data/avebin8.mrc', function (volume) {
+    loader.load('../../models/mrc/bin8Data/avebin8.mrc', function (volume) {
       const geometry = new THREE.BoxGeometry(volume.xLength, volume.yLength, volume.zLength);
       const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
       const cubeX = new THREE.Mesh(geometry, material);
@@ -97,7 +97,7 @@ export class TopRendererComponent implements OnInit {
 
   animate() {
     this.setupRenderer();
-    requestAnimationFrame(this.animate);
+    //requestAnimationFrame(this.animate);
 
   }
 
@@ -115,4 +115,4 @@ export class TopRendererComponent implements OnInit {
   }
 
 
-}
+};

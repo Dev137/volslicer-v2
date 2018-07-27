@@ -7,7 +7,7 @@ import { MiddleRendererComponent } from './middle-renderer/middle-renderer.compo
 import { BottomRendererComponent } from './bottom-renderer/bottom-renderer.component';
 import { MainRendererComponent } from './main-renderer/main-renderer.component';
 import { SlidersComponent } from './sliders/sliders.component';
-
+import { AngularFileUploaderModule } from "angular-file-uploader";
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +18,8 @@ import { SlidersComponent } from './sliders/sliders.component';
     SlidersComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AngularFileUploaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
